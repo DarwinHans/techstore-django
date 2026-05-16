@@ -2,6 +2,15 @@
 
 Aplicación e-commerce desarrollada con Django. Integra autenticación, catálogo persistente con ORM, CRUD administrativo de productos, carrito de compras y registro de pedidos.
 
+**Demo live:** https://darwinhans.pythonanywhere.com
+
+| Rol | Usuario | Contraseña |
+|---|---|---|
+| Administrador | `admin_demo` | `Admin12345` |
+| Cliente | `cliente_demo` | `Cliente12345` |
+
+**Stack:** Django 6.0.3 · SQLite · Python 3.12 · desplegado en PythonAnywhere (free tier).
+
 ---
 
 ## Requisitos previos
