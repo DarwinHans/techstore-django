@@ -191,9 +191,12 @@ Cobertura incluida:
 ## Evidencia
 
 ### Registro de usuario
-![alt text](<Captura de pantalla 2026-04-01 a la(s) 5.01.38 p.m..png>)
+![alt text](<<img width="1279" height="709" alt="Captura de pantalla 2026-05-16 a la(s) 2 47 46 p m" src="https://github.com/user-attachments/assets/12a476c3-6f3a-457f-a935-873af75b5fbb" />
+>)
 
 ### Inicio de sesión
-![alt text](<Captura de pantalla 2026-04-01 a la(s) 5.13.46 p.m..png>)
+![alt text](<<img width="1280" height="708" alt="Captura de pantalla 2026-05-16 a la(s) 2 48 43 p m" src="https://github.com/user-attachments/assets/6c52940f-db0b-4e50-8d73-83dcc15b9046" />
+>)
 ### Acceso a vista protegida
-![alt text](<Captura de pantalla 2026-04-01 a la(s) 5.14.37 p.m..png>)
+![alt text](<<img width="1272" height="711" alt="Captura de pantalla 2026-05-16 a la(s) 2 50 25 p m" src="https://github.com/user-attachments/assets/3668ddc7-a4c8-4c7e-86d2-b9213a800bf9" />
+>)
