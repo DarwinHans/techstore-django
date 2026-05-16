@@ -1,0 +1,81 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}Inicio — TechStore{% endblock %}
+
+{% block content %}
+<div class="px-4 py-5 text-center">
+    <div class="mb-4">
+        <i class="bi bi-shop" style="font-size: 4rem; color: #0d6efd;"></i>
+    </div>
+    <h1 class="display-5 fw-bold">Bienvenido a TechStore</h1>
+    <p class="col-lg-6 mx-auto lead text-muted">
+        Tu tienda de tecnología de confianza. Encuentra los mejores productos al mejor precio.
+    </p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+        {% if user.is_authenticated %}
+            <a href="{% url 'productos' %}" class="btn btn-primary btn-lg px-4">
+                <i class="bi bi-box-seam"></i> Ver catálogo
+            </a>
+            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-lg px-4">
+                <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+        {% else %}
+            <a href="{% url 'registro' %}" class="btn btn-primary btn-lg px-4">
+                <i class="bi bi-person-plus"></i> Crear cuenta
+            </a>
+            <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg px-4">
+                <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+{% if productos_destacados %}
+<div class="py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h4 fw-bold mb-0">Productos destacados</h2>
+        {% if user.is_authenticated %}
+            <a href="{% url 'productos' %}" class="btn btn-sm btn-outline-primary">Ver catálogo completo</a>
+        {% endif %}
+    </div>
+    <div class="row g-4">
+        {% for producto in productos_destacados %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <span class="badge bg-secondary mb-2">{{ producto.categoria.nombre }}</span>
+                        <h3 class="h5 fw-bold">{{ producto.nombre }}</h3>
+                        <p class="text-muted">{{ producto.descripcion|default:"Producto disponible en catálogo." }}</p>
+                        <p class="fs-5 fw-bold mb-0">${{ producto.precio|floatformat:0 }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<div class="row g-4 py-4">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center p-4">
+            <i class="bi bi-shield-lock-fill text-primary mb-3" style="font-size: 2.5rem;"></i>
+            <h5 class="fw-bold">Compra segura</h5>
+            <p class="text-muted">Tus datos están protegidos en todo momento.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center p-4">
+            <i class="bi bi-truck text-success mb-3" style="font-size: 2.5rem;"></i>
+            <h5 class="fw-bold">Envío rápido</h5>
+            <p class="text-muted">Despacho a todo Chile en 24-48 horas hábiles.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center p-4">
+            <i class="bi bi-headset text-warning mb-3" style="font-size: 2.5rem;"></i>
+            <h5 class="fw-bold">Soporte 24/7</h5>
+            <p class="text-muted">Estamos disponibles para ayudarte cuando lo necesites.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}Confirmar compra — TechStore{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="fw-bold mb-3">Confirmar compra</h2>
+        <p class="text-muted">Revisa el detalle antes de registrar el pedido.</p>
+        <ul class="list-group mb-3">
+            {% for item in items %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>{{ item.cantidad }} x {{ item.producto.nombre }}</span>
+                    <strong>${{ item.subtotal|floatformat:0 }}</strong>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="fs-4 fw-bold">Total: ${{ total|floatformat:0 }}</div>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success btn-lg">Registrar pedido</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

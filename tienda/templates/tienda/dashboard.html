@@ -1,0 +1,111 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}Dashboard — TechStore{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">
+            <i class="bi bi-speedometer2 text-primary"></i> Dashboard
+        </h2>
+        <p class="text-muted mb-0">Panel de control — Vista protegida</p>
+    </div>
+    <div>
+        <span class="badge bg-success fs-6">
+            <i class="bi bi-person-check"></i> {{ user.username }}
+        </span>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 bg-primary text-white">
+            <div class="card-body d-flex justify-content-between align-items-center p-4">
+                <div>
+                    <h6 class="text-uppercase opacity-75 mb-1">Total Productos</h6>
+                    <h2 class="fw-bold mb-0">{{ total_productos }}</h2>
+                </div>
+                <i class="bi bi-box-seam" style="font-size: 3rem; opacity: 0.5;"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 bg-success text-white">
+            <div class="card-body d-flex justify-content-between align-items-center p-4">
+                <div>
+                    <h6 class="text-uppercase opacity-75 mb-1">Unidades en Stock</h6>
+                    <h2 class="fw-bold mb-0">{{ total_stock }}</h2>
+                </div>
+                <i class="bi bi-archive" style="font-size: 3rem; opacity: 0.5;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 bg-dark text-white">
+            <div class="card-body d-flex justify-content-between align-items-center p-4">
+                <div>
+                    <h6 class="text-uppercase opacity-75 mb-1">Mis pedidos</h6>
+                    <h2 class="fw-bold mb-0">{{ total_pedidos }}</h2>
+                </div>
+                <i class="bi bi-receipt" style="font-size: 3rem; opacity: 0.5;"></i>
+            </div>
+        </div>
+    </div>
+    {% if es_admin %}
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 bg-warning text-dark">
+            <div class="card-body d-flex justify-content-between align-items-center p-4">
+                <div>
+                    <h6 class="text-uppercase opacity-75 mb-1">Rol</h6>
+                    <h2 class="fw-bold mb-0">Admin</h2>
+                </div>
+                <i class="bi bi-shield-check" style="font-size: 3rem; opacity: 0.5;"></i>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-white border-bottom">
+        <h5 class="mb-0 fw-semibold">Acciones rápidas</h5>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <a href="{% url 'productos' %}" class="btn btn-outline-primary w-100 py-3">
+                    <i class="bi bi-box-seam d-block mb-1" style="font-size: 1.5rem;"></i>
+                    Ver Catálogo
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'carrito' %}" class="btn btn-outline-success w-100 py-3">
+                    <i class="bi bi-cart3 d-block mb-1" style="font-size: 1.5rem;"></i>
+                    Ver Carrito
+                </a>
+            </div>
+            <div class="col-md-4">
+                {% if es_admin %}
+                    <a href="{% url 'admin_productos' %}" class="btn btn-outline-warning w-100 py-3">
+                        <i class="bi bi-tools d-block mb-1" style="font-size: 1.5rem;"></i>
+                        Admin Productos
+                    </a>
+                {% else %}
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger w-100 py-3">
+                        <i class="bi bi-box-arrow-right d-block mb-1" style="font-size: 1.5rem;"></i>
+                        Cerrar Sesión
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-info mt-4">
+    <i class="bi bi-lock-fill me-2"></i>
+    <strong>Vista protegida:</strong> Esta página solo es accesible para usuarios autenticados.
+    Los usuarios no registrados son redirigidos automáticamente al login.
+</div>
+{% endblock %}

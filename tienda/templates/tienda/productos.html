@@ -1,0 +1,55 @@
+{% extends 'tienda/base.html' %}
+
+{% block title %}Catálogo — TechStore{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">
+            <i class="bi bi-box-seam text-primary"></i> Catálogo de productos
+        </h2>
+        <p class="text-muted mb-0">Productos cargados desde la base de datos con Django ORM</p>
+    </div>
+    <a href="{% url 'carrito' %}" class="btn btn-outline-primary">
+        <i class="bi bi-cart3"></i> Ver carrito
+    </a>
+</div>
+
+<div class="row g-4">
+    {% for producto in productos %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <span class="badge bg-secondary align-self-start mb-2">{{ producto.categoria.nombre }}</span>
+                    <h3 class="h5 fw-bold">{{ producto.nombre }}</h3>
+                    <p class="text-muted flex-grow-1">{{ producto.descripcion|default:"Producto tecnológico disponible en tienda." }}</p>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="fs-4 fw-bold">${{ producto.precio|floatformat:0 }}</span>
+                        {% if producto.stock > 0 %}
+                            <span class="badge bg-success">{{ producto.stock }} disponibles</span>
+                        {% else %}
+                            <span class="badge bg-danger">Agotado</span>
+                        {% endif %}
+                    </div>
+                    <form method="post" action="{% url 'agregar_carrito' producto.id %}" class="d-flex gap-2">
+                        {% csrf_token %}
+                        <input type="number" name="cantidad" value="1" min="1" max="{{ producto.stock }}" class="form-control" {% if producto.stock == 0 %}disabled{% endif %}>
+                        <button type="submit" class="btn btn-primary" {% if producto.stock == 0 %}disabled{% endif %}>
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">No hay productos activos en el catálogo.</div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="alert alert-info mt-4">
+    <i class="bi bi-database-check me-2"></i>
+    Este catálogo usa modelos, migraciones y consultas ORM, cumpliendo el foco del Módulo 7.
+</div>
+{% endblock %}
